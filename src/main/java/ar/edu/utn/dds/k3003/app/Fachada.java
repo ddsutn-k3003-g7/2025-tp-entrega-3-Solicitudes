@@ -7,6 +7,7 @@ import ar.edu.utn.dds.k3003.facades.dtos.SolicitudDTO;
 import ar.edu.utn.dds.k3003.model.Solicitud;
 import ar.edu.utn.dds.k3003.repository.InMemorySolicitudRepository;
 import ar.edu.utn.dds.k3003.repository.SolicitudRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +21,10 @@ public class Fachada implements FachadaSolicitudes {
     private final SolicitudRepository solicitudRepository;
     private FachadaFuente fachadaFuente;
 
-    public Fachada(SolicitudRepository solicitudRepository) {
+    @Autowired
+    public Fachada(SolicitudRepository solicitudRepository, FachadaFuente fachadaFuente) {
         this.solicitudRepository = solicitudRepository;
+        this.fachadaFuente = fachadaFuente;
     }
 
     // Constructor que usa el Evaluador
