@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-@Primary
 public class FachadaFuenteRest implements FachadaFuente {
     private final RestTemplate restTemplate;
     private final String baseUrl = "https://two025-tp-entrega-2-larasnr.onrender.com";

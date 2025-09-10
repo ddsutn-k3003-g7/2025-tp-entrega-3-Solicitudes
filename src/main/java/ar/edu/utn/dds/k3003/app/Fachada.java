@@ -103,7 +103,7 @@ public class Fachada implements FachadaSolicitudes {
     @Override
     public boolean estaActivo(String id) {
         return solicitudRepository.findById(id)
-                .map(s -> s.getEstado() != EstadoSolicitudBorradoEnum.RECHAZADA)
+                .map(s -> s.getEstado() == EstadoSolicitudBorradoEnum.ACEPTADA)
                 .orElse(false);
     }
 
