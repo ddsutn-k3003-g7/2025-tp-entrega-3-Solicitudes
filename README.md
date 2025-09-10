@@ -1,4 +1,7 @@
 # 2025-tp-template
 Template para TP UTN-DDS Sábados 
 
-Por el momento en Fachada.java para probar los endpoints hay que comentar la linea //this.fachadaFuente.buscarHechoXId(solicitudDTO.hechoId()); hasta que se una con el código de Fuente y el resto
+ENDPOINTS
+GET /solicitudes?hecho={hechoId} → Devuelve las solicitudes asociadas a un hecho
+GET /solicitudes/hecho/{hechoId}/activo → Devuelve un hecho y si tiene al menos una solicitud ACEPTADA
+GET /solicitudes/{id} → Devuelve una solicitud por su id

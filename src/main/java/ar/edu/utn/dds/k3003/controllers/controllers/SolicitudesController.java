@@ -24,6 +24,12 @@ public class SolicitudesController {
         return fachada.buscarSolicitudXHecho(hechoId);
     }
 
+    @GetMapping("/hecho/{hechoId}/activo")
+    public HechoActivoResponse estaActivo(@PathVariable String hechoId) {
+        boolean activo = fachada.estaActivo(hechoId);
+        return new HechoActivoResponse(hechoId, activo);
+    }
+
     @PostMapping
     public SolicitudDTO agregar(@RequestBody SolicitudDTO solicitud) {
         return fachada.agregar(solicitud);
@@ -42,4 +48,5 @@ public class SolicitudesController {
     //Para no modificar en el PatchMapping toda la solicitud sino solamente el estado y la descripcion
     public record ModificacionSolicitudRequest(String id, EstadoSolicitudBorradoEnum estado, String descripcion){}
 
+    public record HechoActivoResponse(String hechoId, boolean activo){}
 }

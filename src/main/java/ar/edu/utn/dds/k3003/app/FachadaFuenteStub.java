@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-@Primary
 public class FachadaFuenteStub implements FachadaFuente {
     @Override
     public ColeccionDTO agregar(ColeccionDTO coleccionDTO) {
