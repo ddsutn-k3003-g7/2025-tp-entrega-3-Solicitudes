@@ -5,6 +5,7 @@ import ar.edu.utn.dds.k3003.facades.FachadaProcesadorPdI;
 import ar.edu.utn.dds.k3003.facades.dtos.ColeccionDTO;
 import ar.edu.utn.dds.k3003.facades.dtos.HechoDTO;
 import ar.edu.utn.dds.k3003.facades.dtos.PdIDTO;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
+@Primary
 public class FachadaFuenteRest implements FachadaFuente {
     private final RestTemplate restTemplate;
     private final String baseUrl = "https://two025-tp-entrega-2-larasnr.onrender.com";
