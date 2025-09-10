@@ -35,7 +35,7 @@ public class Fachada implements FachadaSolicitudes {
             throw new IllegalStateException("FachadaFuente no fue seteada.");
         }*/
 
-        this.fachadaFuente.buscarHechoXId(solicitudDTO.hechoId());
+        //this.fachadaFuente.buscarHechoXId(solicitudDTO.hechoId());
 
         String nuevoId = UUID.randomUUID().toString();
 
