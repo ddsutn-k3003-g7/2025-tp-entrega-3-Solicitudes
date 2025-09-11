@@ -26,7 +26,7 @@ public class SolicitudesController {
 
     @GetMapping("/hecho/{hechoId}/activo")
     public HechoActivoResponse estaActivo(@PathVariable String hechoId) {
-        boolean activo = fachada.estaActivo(hechoId);
+        boolean activo = !fachada.estaActivo(hechoId);
         return new HechoActivoResponse(hechoId, activo);
     }
 
