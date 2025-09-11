@@ -3,6 +3,7 @@ package ar.edu.utn.dds.k3003.controllers.controllers;
 import ar.edu.utn.dds.k3003.app.Fachada;
 import ar.edu.utn.dds.k3003.facades.dtos.EstadoSolicitudBorradoEnum;
 import ar.edu.utn.dds.k3003.facades.dtos.SolicitudDTO;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +14,12 @@ import java.util.List;
 public class SolicitudesController {
 
     private final Fachada fachada;
+    private final MeterRegistry meterRegistry;
 
     @Autowired
-    public SolicitudesController(Fachada fachada) {
+    public SolicitudesController(Fachada fachada, MeterRegistry meterRegistry) {
         this.fachada = fachada;
+        this.meterRegistry = meterRegistry;
     }
 
     @GetMapping
@@ -32,6 +35,7 @@ public class SolicitudesController {
 
     @PostMapping
     public SolicitudDTO agregar(@RequestBody SolicitudDTO solicitud) {
+        meterRegistry.counter("Solicitudes.POST.usos").increment();
         return fachada.agregar(solicitud);
     }
 
