@@ -4,6 +4,7 @@ import ar.edu.utn.dds.k3003.app.Fachada;
 import ar.edu.utn.dds.k3003.facades.dtos.EstadoSolicitudBorradoEnum;
 import ar.edu.utn.dds.k3003.facades.dtos.SolicitudDTO;
 import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.Timer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,12 @@ public class SolicitudesController {
 
     @GetMapping
     public List<SolicitudDTO> buscarPorHecho(@RequestParam("hecho") String hechoId) {
-        return fachada.buscarSolicitudXHecho(hechoId);
+        Timer.Sample sample = Timer.start(meterRegistry);
+        List<SolicitudDTO> solicitudes = fachada.buscarSolicitudXHecho(hechoId);
+        sample.stop(Timer.builder("Solicitudes.consultaXHecho.tiempo")
+                .description("Tiempo en que tarda en realizar la consulta por hecho")
+                .register(meterRegistry));
+        return solicitudes;
     }
 
     @GetMapping("/hecho/{hechoId}/activo")
