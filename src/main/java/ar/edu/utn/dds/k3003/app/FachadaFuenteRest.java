@@ -21,8 +21,8 @@ public class FachadaFuenteRest implements FachadaFuente {
     private final RestTemplate restTemplate;
     private final String baseUrl = "https://two025-tp-entrega-2-larasnr.onrender.com";
 
-    public FachadaFuenteRest() {
-        this.restTemplate = new RestTemplate();
+    public FachadaFuenteRest(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
     }
 
     @Override
