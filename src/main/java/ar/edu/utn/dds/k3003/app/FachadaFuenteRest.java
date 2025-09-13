@@ -1,15 +1,18 @@
 package ar.edu.utn.dds.k3003.app;
 
-import ar.edu.utn.dds.k3003.facades.FachadaFuente;
 import ar.edu.utn.dds.k3003.facades.FachadaProcesadorPdI;
 import ar.edu.utn.dds.k3003.facades.dtos.ColeccionDTO;
 import ar.edu.utn.dds.k3003.facades.dtos.HechoDTO;
 import ar.edu.utn.dds.k3003.facades.dtos.PdIDTO;
+import ar.edu.utn.dds.k3003.services.FachadaFuente;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 @Service
@@ -64,5 +67,31 @@ public class FachadaFuenteRest implements FachadaFuente {
     @Override
     public List<ColeccionDTO> colecciones() {
         return List.of();
+    }
+
+    @Override
+    public HechoDTO ocultarHecho(String id) {
+        try {
+            String url = baseUrl + "/hechos/" + id;
+
+            Map<String, String> body = new HashMap<>();
+            body.put("estado", "borrado");
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+            HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(body, headers);
+
+            ResponseEntity<HechoDTO> response = restTemplate.exchange(
+                    url,
+                    HttpMethod.PATCH,
+                    requestEntity,
+                    HechoDTO.class
+            );
+
+            return response.getBody();
+        } catch (Exception e) {
+            throw new NoSuchElementException("No se puedo actualizar es estado del hecho " + id);
+        }
     }
 }

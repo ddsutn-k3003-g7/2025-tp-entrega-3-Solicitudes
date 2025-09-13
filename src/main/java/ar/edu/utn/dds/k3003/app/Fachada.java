@@ -1,12 +1,12 @@
 package ar.edu.utn.dds.k3003.app;
 
-import ar.edu.utn.dds.k3003.facades.FachadaFuente;
-import ar.edu.utn.dds.k3003.facades.FachadaSolicitudes;
 import ar.edu.utn.dds.k3003.facades.dtos.EstadoSolicitudBorradoEnum;
 import ar.edu.utn.dds.k3003.facades.dtos.SolicitudDTO;
 import ar.edu.utn.dds.k3003.model.Solicitud;
 import ar.edu.utn.dds.k3003.repository.InMemorySolicitudRepository;
 import ar.edu.utn.dds.k3003.repository.SolicitudRepository;
+import ar.edu.utn.dds.k3003.services.FachadaFuente;
+import ar.edu.utn.dds.k3003.services.FachadaSolicitudes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -68,6 +68,10 @@ public class Fachada implements FachadaSolicitudes {
         solicitud.setDescripcion(nuevaDescripcion);
 
         solicitudRepository.save(solicitud);
+
+        if (nuevoEstado == EstadoSolicitudBorradoEnum.ACEPTADA) {
+            this.fachadaFuente.ocultarHecho(solicitud.getHechoId());
+        }
 
         return new SolicitudDTO(
                 solicitud.getId(),
