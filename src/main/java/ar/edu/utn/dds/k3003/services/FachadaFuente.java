@@ -19,7 +19,7 @@ public interface FachadaFuente {
 
     List<HechoDTO> buscarHechosXColeccion(String var1) throws NoSuchElementException;
 
-    HechoDTO ocultarHecho(String var1);
+    void ocultarHecho(String var1);
 
     void setProcesadorPdI(FachadaProcesadorPdI var1);
 

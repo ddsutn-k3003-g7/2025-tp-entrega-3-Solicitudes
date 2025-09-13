@@ -70,7 +70,7 @@ public class FachadaFuenteRest implements FachadaFuente {
     }
 
     @Override
-    public HechoDTO ocultarHecho(String id) {
+    public void ocultarHecho(String id) {
         try {
             String url = baseUrl + "/hechos/" + id;
 
@@ -88,10 +88,9 @@ public class FachadaFuenteRest implements FachadaFuente {
                     requestEntity,
                     HechoDTO.class
             );
-
-            return response.getBody();
         } catch (Exception e) {
-            throw new NoSuchElementException("No se puedo actualizar es estado del hecho " + id);
+            e.printStackTrace();
+            throw new NoSuchElementException("No se puedo actualizar el estado del hecho " + id);
         }
     }
 }
