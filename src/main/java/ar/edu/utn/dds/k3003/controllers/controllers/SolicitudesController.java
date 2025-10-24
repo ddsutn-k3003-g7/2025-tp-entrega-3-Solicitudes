@@ -39,6 +39,11 @@ public class SolicitudesController {
         return new HechoActivoResponse(hechoId, activo);
     }
 
+    @GetMapping("/hechos")
+    public List<String> hechosConSolicitudes() {
+        return fachada.obtenerHechoIdsUnicos();
+    }
+
     @PostMapping
     public SolicitudDTO agregar(@RequestBody SolicitudDTO solicitud) {
         meterRegistry.counter("Solicitudes.POST.usos").increment();
@@ -59,4 +64,6 @@ public class SolicitudesController {
     public record ModificacionSolicitudRequest(String id, EstadoSolicitudBorradoEnum estado, String descripcion){}
 
     public record HechoActivoResponse(String hechoId, boolean activo){}
+
+    public record HechoId(String hechoId){}
 }

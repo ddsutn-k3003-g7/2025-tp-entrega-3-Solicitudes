@@ -114,4 +114,8 @@ public class Fachada implements FachadaSolicitudes {
     public void setFachadaFuente(FachadaFuente fachadaFuente) {
         this.fachadaFuente = fachadaFuente;
     }
+
+    public List<String> obtenerHechoIdsUnicos() {
+        return solicitudRepository.findDistinctByHechoId();
+    }
 }

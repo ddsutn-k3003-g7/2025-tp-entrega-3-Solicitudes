@@ -26,47 +26,12 @@ public class FachadaFuenteRest implements FachadaFuente {
     }
 
     @Override
-    public ColeccionDTO agregar(ColeccionDTO coleccionDTO) {
-        return null;
-    }
-
-    @Override
-    public ColeccionDTO buscarColeccionXId(String s) throws NoSuchElementException {
-        return null;
-    }
-
-    @Override
-    public HechoDTO agregar(HechoDTO hechoDTO) {
-        return null;
-    }
-
-    @Override
     public HechoDTO buscarHechoXId(String id) throws NoSuchElementException {
         try {
             return restTemplate.getForObject(baseUrl + "/hechos/" + id, HechoDTO.class);
         } catch (Exception e) {
             throw new NoSuchElementException("No se encontró el hecho con id " + id);
         }
-    }
-
-    @Override
-    public List<HechoDTO> buscarHechosXColeccion(String s) throws NoSuchElementException {
-        return List.of();
-    }
-
-    @Override
-    public void setProcesadorPdI(FachadaProcesadorPdI fachadaProcesadorPdI) {
-
-    }
-
-    @Override
-    public PdIDTO agregar(PdIDTO pdIDTO) throws IllegalStateException {
-        return null;
-    }
-
-    @Override
-    public List<ColeccionDTO> colecciones() {
-        return List.of();
     }
 
     @Override
