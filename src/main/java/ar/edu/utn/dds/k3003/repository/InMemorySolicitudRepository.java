@@ -56,6 +56,11 @@ public class InMemorySolicitudRepository implements SolicitudRepository {
     }
 
     @Override
+    public List<String> findDistinctByHechoId() {
+        return List.of();
+    }
+
+    @Override
     public List<Solicitud> findAllById(Iterable<String> strings) {
         return List.of();
     }
