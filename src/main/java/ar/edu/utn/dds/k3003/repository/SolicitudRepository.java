@@ -13,7 +13,7 @@ public interface SolicitudRepository extends JpaRepository<Solicitud, String> {
     Optional<Solicitud> findById(String id);
     List<Solicitud> findByHechoId(String hechoId);
     List<Solicitud> findAll();
-    @Query("SELECT DISTINCT s.hechoId FROM Solicitudes s")
+    @Query("SELECT DISTINCT s.hechoId FROM Solicitud s")
     List<String> findDistinctByHechoId();
 
 }
